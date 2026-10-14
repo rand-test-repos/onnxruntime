@@ -445,9 +445,9 @@ class ONNXModel:
     def replace_node_input(node, old_input_name, new_input_name):
         """Replace input of a node."""
         assert isinstance(old_input_name, str) and isinstance(new_input_name, str)
-        for j in range(len(node.input)):
-            if node.input[j] == old_input_name:
-                node.input[j] = new_input_name
+        inputs = [new_input_name if input_name == old_input_name else input_name for input_name in node.input]
+        node.ClearField("input")
+        node.input.extend(inputs)
 
     def replace_input_of_all_nodes(self, old_input_name, new_input_name, white_optype=None, black_optype=None):
         """Replace inputs of all nodes."""
@@ -468,9 +468,9 @@ class ONNXModel:
     def replace_node_output(node, old_output_name, new_output_name):
         """Replace output of a node."""
         assert isinstance(old_output_name, str) and isinstance(new_output_name, str)
-        for j in range(len(node.output)):
-            if node.output[j] == old_output_name:
-                node.output[j] = new_output_name
+        outputs = [new_output_name if output == old_output_name else output for output in node.output]
+        node.ClearField("output")
+        node.output.extend(outputs)
 
     def replace_output_of_all_nodes(self, old_output_name, new_output_name, white_optype=None, black_optype=None):
         """Replace outputs of all nodes."""
