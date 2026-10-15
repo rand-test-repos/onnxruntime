@@ -1372,7 +1372,6 @@ def main():
                 max_batch_size=args.max_trt_batch_size,
                 nvtx_profile=False,
                 use_cuda_graph=args.enable_cuda_graph,
-                skip_warmup=args.skip_warmup,
             )
     elif args.engine == "optimum" and provider == "CUDAExecutionProvider":
         result = run_optimum_ort(
