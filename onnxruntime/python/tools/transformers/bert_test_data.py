@@ -592,9 +592,9 @@ def create_and_save_test_data(
     for i, inputs in enumerate(all_inputs):
         directory = os.path.join(output_dir, "test_data_set_" + str(i))
         result = session.run(output_names, inputs)
-        for i, output_name in enumerate(output_names):  # noqa: PLW2901
-            tensor_result = numpy_helper.from_array(np.asarray(result[i]), output_name)
-            with open(os.path.join(directory, f"output_{i}.pb"), "wb") as file:
+        for output_index, output_name in enumerate(output_names):
+            tensor_result = numpy_helper.from_array(np.asarray(result[output_index]), output_name)
+            with open(os.path.join(directory, f"output_{output_index}.pb"), "wb") as file:
                 file.write(tensor_result.SerializeToString())
 
 
