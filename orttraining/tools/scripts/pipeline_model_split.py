@@ -134,10 +134,10 @@ def split_graph(model, split_edge_groups):
             new_receive.output.extend([new_receive_output_name])
 
             for output_node in output_nodes:
-                for i in range(len(output_node.input)):  # noqa: PLW2901
+                for input_index in range(len(output_node.input)):
                     for edgeId in edgeIds:  # noqa: N806
-                        if output_node.input[i] == edgeId:
-                            output_node.input[i] = new_receive_output_name
+                        if output_node.input[input_index] == edgeId:
+                            output_node.input[input_index] = new_receive_output_name
 
         new_send_nodes.append(new_send)
         new_recv_nodes.append(new_receive)
